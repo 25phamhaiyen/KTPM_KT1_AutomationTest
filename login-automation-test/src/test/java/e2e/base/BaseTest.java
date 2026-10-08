@@ -2,6 +2,7 @@ package e2e.base;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,6 +10,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 
 public abstract class BaseTest {
+
+    @RegisterExtension
+    static final FailedTestScreenshotExtension SCREENSHOT_EXTENSION = new FailedTestScreenshotExtension();
 
     protected WebDriver driver;
 

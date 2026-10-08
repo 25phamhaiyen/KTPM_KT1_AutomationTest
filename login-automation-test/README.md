@@ -160,6 +160,22 @@ Sau khi chạy xong lệnh `mvn clean test`, báo cáo chi tiết được sinh 
 - **XML Reports:** `login-automation-test/target/surefire-reports/TEST-e2e.tests.LoginE2ETest.xml`
 - **Text Summary:** `login-automation-test/target/surefire-reports/e2e.tests.LoginE2ETest.txt`
 
+### Allure Report
+
+Allure results are written to `target/allure-results`. Run the suite through Maven's `verify` phase to automatically generate the HTML report after the tests:
+
+```powershell
+mvn clean verify
+```
+
+The generated report is available at `target/site/allure-maven-plugin/index.html`. Open it in a browser. To start the report in a local server instead, run:
+
+```powershell
+mvn allure:serve
+```
+
+Failed tests include a browser screenshot attachment when Chrome can capture one. Maven stops at a test failure, so automatic HTML generation in this lifecycle runs when the test phase succeeds; raw Allure results remain in `target/allure-results` after a failed run.
+
 ---
 
 ## 7. Hướng dẫn bổ sung Test Case mới
