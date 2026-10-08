@@ -111,4 +111,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_009: Username chứa ký tự đặc biệt -> Hệ thống không crash")
+    void login_whenUsernameSpecialChars_handlesSafely() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("user_#$!@%*", "123456");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
