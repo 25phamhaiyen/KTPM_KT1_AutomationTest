@@ -27,4 +27,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_EMPTY_USERNAME);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_002: Bỏ trống Password -> Hiển thị lỗi 'Bạn chưa nhập mật khẩu'")
+    void login_whenEmptyPassword_showsEmptyPasswordError() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("testuser", "");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_EMPTY_PASSWORD);
+    }
 }
