@@ -223,4 +223,18 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.getUsernamePlaceholder()).isEqualTo("Tên đăng nhập");
         assertThat(loginPage.getPasswordPlaceholder()).isEqualTo("Mật khẩu");
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_021: Trạng thái Checkbox 'Giữ tôi luôn đăng nhập' (Remember Me)")
+    void login_rememberMeCheckbox_canToggle() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        assertThat(loginPage.isRememberMeChecked()).isFalse();
+
+        loginPage.toggleRememberMe();
+        assertThat(loginPage.isRememberMeChecked()).isTrue();
+
+        loginPage.toggleRememberMe();
+        assertThat(loginPage.isRememberMeChecked()).isFalse();
+    }
 }
