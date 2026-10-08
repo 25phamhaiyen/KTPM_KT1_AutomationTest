@@ -196,4 +196,12 @@ public class LoginE2ETest extends BaseTest {
 
         assertThat(loginPage.isPasswordVisibilityTogglePresent()).isFalse();
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_018: Nút Đăng nhập hiển thị và có thể click")
+    void login_button_isClickable() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        assertThat(loginPage.isLoginButtonEnabled()).isTrue();
+    }
 }
