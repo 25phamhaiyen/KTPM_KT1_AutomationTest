@@ -188,4 +188,12 @@ public class LoginE2ETest extends BaseTest {
 
         assertThat(loginPage.getPasswordInputType()).isEqualTo("password");
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_017: Website không có nút hiện/ẩn password (đúng theo thiết kế giao diện)")
+    void login_passwordVisibilityToggle_matchesDesign() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        assertThat(loginPage.isPasswordVisibilityTogglePresent()).isFalse();
+    }
 }
