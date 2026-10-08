@@ -237,4 +237,17 @@ public class LoginE2ETest extends BaseTest {
         loginPage.toggleRememberMe();
         assertThat(loginPage.isRememberMeChecked()).isFalse();
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_023: Nhập chuỗi 500 ký tự vào Username -> Xử lý an toàn")
+    void login_whenVeryLongUsername_handlesSafely() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        String longUsername = "A".repeat(500);
+        loginPage.loginAs(longUsername, "123456");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
