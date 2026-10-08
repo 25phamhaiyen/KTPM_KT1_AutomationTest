@@ -99,4 +99,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_008: Password chứa khoảng trắng -> Giữ nguyên chuỗi và báo lỗi")
+    void login_whenPasswordHasSpaces_showsError() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("validuser", "pass word 123");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
