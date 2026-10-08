@@ -287,4 +287,18 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_027: Thử đăng nhập sai liên tiếp -> Hoạt động ổn định")
+    void login_whenMultipleWrongAttempts_handlesConsistently() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        for (int i = 1; i <= 3; i++) {
+            loginPage.loginAs("wrong_user_" + i, "wrong_pass_" + i);
+
+            assertThat(loginPage.isOnLoginPage()).isTrue();
+            assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+            assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+        }
+    }
 }
