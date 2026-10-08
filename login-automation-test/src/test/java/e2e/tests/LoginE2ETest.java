@@ -75,4 +75,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_006: Cả Username và Password đều sai -> Báo lỗi không đúng")
+    void login_whenBothWrong_showsInvalidCredentialsError() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("invalid_user_utc", "invalid_pwd_utc");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
