@@ -207,4 +207,4 @@ Khi cần mở rộng thêm kịch bản kiểm thử:
 3. **Cập nhật tài liệu Excel:**
    Bổ sung dòng thông tin tương ứng vào file `Login_Test_Cases.xlsx`.
 
-<img src='./target/site/allure-maven-plugin/report.png>
+
