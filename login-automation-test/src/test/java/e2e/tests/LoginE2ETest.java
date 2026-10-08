@@ -156,4 +156,18 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isOnLoginPage()).isFalse();
         assertThat(dashboardPage.isLoaded()).isTrue();
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_012: Đăng nhập bằng phím Enter tại ô Password")
+    void login_whenPressEnter_submitsForm() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.enterUsername("testuser");
+        loginPage.enterPassword("somepassword");
+        loginPage.submitViaEnterKey();
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
