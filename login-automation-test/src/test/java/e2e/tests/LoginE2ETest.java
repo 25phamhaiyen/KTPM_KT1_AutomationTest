@@ -180,4 +180,12 @@ public class LoginE2ETest extends BaseTest {
 
         assertThat(driver.getCurrentUrl()).contains("accounts.google.com");
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_016: Password được che (type='password')")
+    void login_passwordField_isMasked() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        assertThat(loginPage.getPasswordInputType()).isEqualTo("password");
+    }
 }
