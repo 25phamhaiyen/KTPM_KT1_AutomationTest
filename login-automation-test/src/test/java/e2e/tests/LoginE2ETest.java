@@ -263,4 +263,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_025: SQL Injection payload -> Chặn và báo lỗi")
+    void login_whenSqlInjection_blocksSafely() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("' OR 1=1 --", "' OR 1=1 --");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
