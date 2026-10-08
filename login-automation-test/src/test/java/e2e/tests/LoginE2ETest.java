@@ -250,4 +250,17 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_024: Nhập chuỗi 500 ký tự vào Password -> Xử lý an toàn")
+    void login_whenVeryLongPassword_handlesSafely() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        String longPassword = "B".repeat(500);
+        loginPage.loginAs("testuser", longPassword);
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
