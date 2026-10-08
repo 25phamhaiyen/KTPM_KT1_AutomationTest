@@ -170,4 +170,14 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_015: Click 'Đăng nhập bằng e-mail UTC' -> Chuyển hướng Google OAuth")
+    void login_whenClickGoogleOAuth_redirectsToGoogleAccounts() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.clickGoogleLogin();
+
+        assertThat(driver.getCurrentUrl()).contains("accounts.google.com");
+    }
 }
