@@ -275,4 +275,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_026: XSS payload -> Không thực thi script và báo lỗi")
+    void login_whenXssPayload_handlesSafely() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("<script>alert(1)</script>", "123456");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
