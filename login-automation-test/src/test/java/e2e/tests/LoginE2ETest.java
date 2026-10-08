@@ -204,4 +204,14 @@ public class LoginE2ETest extends BaseTest {
 
         assertThat(loginPage.isLoginButtonEnabled()).isTrue();
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_019: Click 'Bạn quên mật khẩu đăng nhập ?' -> Chuyển hướng /Login/GetPass")
+    void login_whenClickForgotPassword_navigatesToGetPass() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.clickForgotPassword();
+
+        assertThat(driver.getCurrentUrl()).contains("/Login/GetPass");
+    }
 }
