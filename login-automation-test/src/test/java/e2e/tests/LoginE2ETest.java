@@ -214,4 +214,13 @@ public class LoginE2ETest extends BaseTest {
 
         assertThat(driver.getCurrentUrl()).contains("/Login/GetPass");
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_020: Placeholder ô Username và Password đúng chuẩn")
+    void login_placeholders_areCorrect() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        assertThat(loginPage.getUsernamePlaceholder()).isEqualTo("Tên đăng nhập");
+        assertThat(loginPage.getPasswordPlaceholder()).isEqualTo("Mật khẩu");
+    }
 }
