@@ -135,4 +135,25 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_011: Đăng nhập thành công -> rời khỏi trang Login")
+    void login_whenValidCredentials_leavesLoginPage() {
+        String utcUser = System.getenv("UTC_USER");
+        String utcPass = System.getenv("UTC_PASS");
+
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        if (utcUser == null || utcPass == null || utcUser.trim().isEmpty() || utcPass.trim().isEmpty()) {
+            // Attempt to login with null/placeholder and fail with explicit message
+            loginPage.loginAs("INVALID_PLACEHOLDER", "INVALID_PLACEHOLDER");
+            fail("Valid UTC credentials are required for this test.");
+            return;
+        }
+
+        DashboardPage dashboardPage = loginPage.loginAs(utcUser, utcPass);
+
+        assertThat(loginPage.isOnLoginPage()).isFalse();
+        assertThat(dashboardPage.isLoaded()).isTrue();
+    }
 }
