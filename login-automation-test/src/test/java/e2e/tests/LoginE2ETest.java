@@ -87,4 +87,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_007: Username có khoảng trắng -> Báo lỗi hoặc xử lý an toàn")
+    void login_whenUsernameHasSpaces_showsError() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("  validuser  ", "password123");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
