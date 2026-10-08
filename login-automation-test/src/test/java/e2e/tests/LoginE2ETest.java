@@ -51,4 +51,16 @@ public class LoginE2ETest extends BaseTest {
         assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
         assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_EMPTY_USERNAME);
     }
+
+    @Test
+    @DisplayName("TC_LOGIN_004: Username không tồn tại -> Báo 'Tài khoản hoặc mật khẩu không đúng.'")
+    void login_whenNonExistentUsername_showsInvalidCredentialsError() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("nonexistent_user_9999", "ValidPass123!");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_INVALID_CREDENTIALS);
+    }
 }
