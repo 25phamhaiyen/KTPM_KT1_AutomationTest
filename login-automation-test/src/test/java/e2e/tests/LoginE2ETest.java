@@ -16,4 +16,15 @@ public class LoginE2ETest extends BaseTest {
     private static final String ERR_EMPTY_PASSWORD = "Bạn chưa nhập mật khẩu";
     private static final String ERR_INVALID_CREDENTIALS = "Tài khoản hoặc mật khẩu không đúng.";
 
+    @Test
+    @DisplayName("TC_LOGIN_001: Bỏ trống Username -> Hiển thị lỗi 'Bạn chưa nhập tên đăng nhập'")
+    void login_whenEmptyUsername_showsEmptyUsernameError() {
+        LoginPage loginPage = new LoginPage(driver).open();
+
+        loginPage.loginAs("", "123456");
+
+        assertThat(loginPage.isOnLoginPage()).isTrue();
+        assertThat(loginPage.isErrorMessageDisplayed()).isTrue();
+        assertThat(loginPage.getErrorMessageText()).isEqualTo(ERR_EMPTY_USERNAME);
+    }
 }
