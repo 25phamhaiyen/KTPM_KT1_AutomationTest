@@ -192,4 +192,4 @@ Khi cần mở rộng thêm kịch bản kiểm thử:
    Bổ sung dòng thông tin tương ứng vào file `Login_Test_Cases.xlsx`.
 
 4. **Allure Report sau khi chạy 25 test case:**
-   <img src="./login-automation-test/target/site/allure-maven-plugin/report.png">
+   <img src="./login-automation-test/screenshots/report.png">
